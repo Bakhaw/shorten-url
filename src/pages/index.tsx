@@ -9,7 +9,10 @@ import Snackbar from "./components/Snackbar";
 
 function Home() {
   const inputRef = useRef<HTMLInputElement>(null);
-  const [data, setData] = useState<ShortenUrlApiResponse | null>(null);
+  const [data, setData] = useState<ShortenUrlApiResponse["data"] | null>(null);
+  const [error, setError] = useState<ShortenUrlApiResponse["error"] | null>(
+    null
+  );
 
   async function handleSubmit() {
     if (!inputRef.current || !inputRef.current.value) return;
@@ -17,10 +20,12 @@ function Home() {
     const response = await getShortenUrl(inputRef.current.value);
 
     if (response.error) {
-      // handle errors
+      setError(response.error);
+      setData(null);
+    } else {
+      setError(null);
+      setData(response.data);
     }
-
-    setData(response);
   }
 
   return (
@@ -48,13 +53,16 @@ function Home() {
             message={
               <>
                 Voici le lien raccourci:{" "}
-                <a href={data.data.shortenUrl} target="_blank">
-                  {data.data.shortenUrl}
+                <a href={data.shortenUrl} target="_blank">
+                  {data.shortenUrl}
                 </a>
               </>
             }
+            type="success"
           />
         )}
+
+        {error && <Snackbar message={error} type="error" />}
       </div>
     </main>
   );

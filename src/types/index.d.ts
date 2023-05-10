@@ -2,6 +2,7 @@ export interface ShortenUrlApiResponse {
   data: {
     originalUrl: string;
     shortenUrl: string;
-  };
-  error: boolean;
+  } | null;
+  error: string | null;
+  success: boolean;
 }
