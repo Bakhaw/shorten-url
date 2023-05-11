@@ -5,11 +5,17 @@ interface SnackbarProps {
 
 const Snackbar: React.FC<SnackbarProps> = ({ message, type }) => {
   const colorsByType = {
-    error: "bg-red-light",
-    success: "bg-green-light",
+    error: "bg-red-light text-red",
+    success: "bg-green-light text-green",
   };
 
-  return <div className={`h-11 w-full ${colorsByType[type]}`}>{message}</div>;
+  return (
+    <div
+      className={`flex flex-row items-center h-10 w-full px-4 rounded text-sm ${colorsByType[type]}`}
+    >
+      {message}
+    </div>
+  );
 };
 
 export default Snackbar;
