@@ -4,9 +4,9 @@ import { Nunito } from "next/font/google";
 import { getShortenUrl } from "./api";
 import { ShortenUrlApiResponse } from "@/types";
 
-import Divider from "./components/Divider";
-import Header from "./components/Header";
-import Snackbar from "./components/Snackbar";
+import Divider from "../components/Divider";
+import Header from "../components/Header";
+import Snackbar from "../components/Snackbar";
 
 const nunito = Nunito({ subsets: ["latin"] });
 
